@@ -18,6 +18,7 @@ class ProdukController extends Controller
     {
         return view('produkCreate', ['categories' => Category::all()]);
     }
+    
 
     public function store(Request $request) {
         $request->validate([
@@ -58,6 +59,17 @@ class ProdukController extends Controller
             'product' => Product::find($product),
             'categories' => Category::all()
         ]);
+    }
+
+    public function search(Request $request)
+    {
+    $keyword = $request->q;
+
+    $products = \App\Models\Product::where('nama', 'LIKE', "%{$keyword}%")
+                ->orWhere('deskripsi', 'LIKE', "%{$keyword}%")
+                ->paginate(10);
+
+    return view('products.index', compact('products', 'keyword'));
     }
 
     public function update(Request $request)
