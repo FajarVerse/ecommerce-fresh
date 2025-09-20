@@ -23,6 +23,5 @@ class DetailProductController extends Controller
         $chartController = new ChartController();
 
         return $chartController->store($request);
-
     }
 }

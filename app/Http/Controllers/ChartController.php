@@ -20,12 +20,12 @@ class ChartController extends Controller
     {
         $request->validate([
             'user_id' => 'required|integer',
-            'producr_id' =>'required|integer',
-            'qty' =>'required|integer',
+            'producr_id' => 'required|integer',
+            'qty' => 'required|integer',
             'price_snapshot' => 'required|integer'
         ]);
 
-        $chart = chart:: where('user_id', Auth::id())->where('product_id', $request->product_id)->first();
+        $chart = chart::where('user_id', Auth::id())->where('product_id', $request->product_id)->first();
 
         if ($chart) {
             $chart->quantity += $request->qty;
@@ -37,9 +37,9 @@ class ChartController extends Controller
                 'quantity' => $request->qty,
                 'price_snapshot' => $request->price_snapshot
             ])
-            );
+        );
 
-            return back();
+        return back();
     }
 
     public function updateQty(request $request, Chart $chart)
@@ -62,8 +62,7 @@ class ChartController extends Controller
     public function destroy(Chart $chart)
     {
         Chart::where('id', $chart->id)->where('user_id', Auth::id())->delete();
-        
+
         return back();
     }
-    
 }

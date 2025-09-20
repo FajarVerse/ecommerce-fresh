@@ -9,6 +9,6 @@ class OrderController extends Controller
 {
     public function index()
     {
-    return view('Order', ['ordes' => Order::filter(request(['keyword']))->paginate(10)]);
+        return view('Order', ['ordes' => Order::filter(request(['keyword']))->paginate(10)]);
     }
 }

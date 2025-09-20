@@ -11,22 +11,23 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        return view('produk', ['product'=> Product::filter(request(['keyword']))->paginate(10)]);
-    }   
+        return view('produk', ['product' => Product::filter(request(['keyword']))->paginate(10)]);
+    }
 
     public function create()
     {
         return view('produkCreate', ['categories' => Category::all()]);
     }
-    
 
-    public function store(Request $request) {
+
+    public function store(Request $request)
+    {
         $request->validate([
-            'nama'=> 'required|string|max:225',
-            'harga'=> 'required|numeric|min:1',
+            'nama' => 'required|string|max:225',
+            'harga' => 'required|numeric|min:1',
             'deskripsi' => 'required|string|max:500',
-            'stok'=>'required|numeric|min:1',
-            'category_id'=>'required|numeric|min:1',
+            'stok' => 'required|numeric|min:1',
+            'category_id' => 'required|numeric|min:1',
         ]);
 
         $product = Product::create([
@@ -40,14 +41,14 @@ class ProdukController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = uniqid() . '.' .
-            $image->getClientOriginalExtension();
+                $image->getClientOriginalExtension();
 
-            Storage::disk('public')->putFileAs('image_products',$image,$imageName);
+            Storage::disk('public')->putFileAs('image_products', $image, $imageName);
 
             $product->update([
                 'image' => 'image_products/' . $imageName
             ]);
-        return redirect('/');
+            return redirect('/');
         }
     }
 
@@ -63,13 +64,13 @@ class ProdukController extends Controller
 
     public function search(Request $request)
     {
-    $keyword = $request->q;
+        $keyword = $request->q;
 
-    $products = \App\Models\Product::where('nama', 'LIKE', "%{$keyword}%")
-                ->orWhere('deskripsi', 'LIKE', "%{$keyword}%")
-                ->paginate(10);
+        $products = \App\Models\Product::where('nama', 'LIKE', "%{$keyword}%")
+            ->orWhere('deskripsi', 'LIKE', "%{$keyword}%")
+            ->paginate(10);
 
-    return view('products.index', compact('products', 'keyword'));
+        return view('products.index', compact('products', 'keyword'));
     }
 
     public function update(Request $request)
@@ -89,20 +90,19 @@ class ProdukController extends Controller
         $product->update([
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
-            'harga'=> $request->harga,
+            'harga' => $request->harga,
             'category_id' => $request->category_id
         ]);
 
         if ($request->hasFile('image')) {
 
-            if($oldImage && Storage::disk('public')->exists($oldImage))
-            {
+            if ($oldImage && Storage::disk('public')->exists($oldImage)) {
                 Storage::disk('public')->delete($oldImage);
             }
 
             $image = $request->file('image');
             $imageName = uniqid() . '.' .
-            $image->getClientOriginalExtension();
+                $image->getClientOriginalExtension();
 
             Storage::disk('public')->putFileAs('image_products', $image, $imageName);
 

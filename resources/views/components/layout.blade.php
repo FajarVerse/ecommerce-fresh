@@ -36,6 +36,7 @@
     @vite('resources/css/style.css')
     @vite('resources/css/cardProduct.css')
 
+
 </head>
 
 <body>

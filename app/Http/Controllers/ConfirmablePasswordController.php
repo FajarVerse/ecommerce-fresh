@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ConfirmablePasswordController extends Controller
 {
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         if (! Auth::guard('web')->validate([
             'password' => $request->password,

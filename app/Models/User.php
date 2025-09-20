@@ -21,11 +21,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
+        'email',
+        'nohp',
+        'alamat',
+        'kota',
+        'negara',
+        'kodepos',
         'is_admin',
         'password',
     ];
 
-    public function Order():HasMany{
+    public function Order(): HasMany
+    {
         return $this->hasMany(Order::class, 'user_id');
     }
 

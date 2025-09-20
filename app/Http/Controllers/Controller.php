@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 abstract class Controller
 {
-     public function show($id)
+    public function show($id)
     {
         // Ambil produk detail
         $product = Product::findOrFail($id);
@@ -18,9 +18,9 @@ abstract class Controller
 
         // Ambil produk lain untuk related products (bisa filter by category)
         $products = Product::where('id', '!=', $id)
-                           ->latest()
-                           ->take(6)
-                           ->get();
+            ->latest()
+            ->take(6)
+            ->get();
 
         // Kirim data ke view
         return view('shopDetail', compact('product', 'categories', 'products'));

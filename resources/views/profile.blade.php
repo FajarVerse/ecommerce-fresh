@@ -14,9 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- CSS Files -->
     @vite('resources/css/dashboard/argon-dashboard.css?v=2.1.0')
 </head>
 
@@ -34,10 +32,11 @@
                     <div class="col-auto my-auto">
                         <div class="h-100">
                             <h5 class="mb-1">
-                                Gifari Fajar Maulana
+                                {{ $user->username }}
                             </h5>
                             <p class="mb-0 font-weight-bold text-sm">
-                                <span>083888822</span> | <span>gifarifajar@gmail.com</span>
+                                <span>{{ $user->email ?? 'Alamat email belum dilengkapi' }}</span> |
+                                <span>{{ $user->nohp ?? 'Nomor telepon belum dilengkapi' }}</span>
                             </p>
                         </div>
                     </div>
@@ -52,19 +51,17 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center "
-                                        data-bs-toggle="tab" href="{{ route("shop") }}" role="tab" aria-selected="true">
+                                        data-bs-toggle="tab" href="{{ route('shop') }}" role="tab"
+                                        aria-selected="true">
                                         <span class="ms-2">Kembali</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <form action="{{ route("logout") }}" method="post">
+                                    <form action="{{ route('logout') }}" method="post">
                                         @csrf
-                                        <button type="submit" class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center text-danger">Logout</button>
+                                        <button type="submit"
+                                            class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center text-danger">Logout</button>
                                     </form>
-                                    {{-- <a href="{{ route("logout") }}" method ="post" class=""
-                                        data-bs-toggle="tab" role="tab" aria-selected="false">
-                                        <span class="ms-2">Log Out</span>
-                                    </a> --}}
                                 </li>
                             </ul>
                         </div>
@@ -76,11 +73,13 @@
         <div class="row px-4 mt-5">
             <div class="col-md-8">
                 <div class="card">
-                    <form action="" class="col-md-12">
+                    <form action="{{ route('profile.update', $user->id) }}" method="POST" class="col-md-12">
+                        @csrf
+                        @method('PATCH')
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
                                 <p class="mb-0">Edit Profile</p>
-                                <button class="btn btn-success btn-sm ms-auto">Simpan</button>
+                                <button type="submit" class="btn btn-success btn-sm ms-auto">Simpan</button>
                             </div>
                         </div>
                         <div class="card-body">
@@ -89,42 +88,52 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Username</label>
-                                        <input class="form-control" type="text" value="lucky.jesse" name="username">
+                                        <input class="form-control" type="text" value="{{ $user->username }}"
+                                            name="username">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Alamat email</label>
-                                        <input class="form-control" type="email" value="jesse@example.com"
-                                            name="email">
+                                        <input class="form-control" type="email" value="{{ $user->email }}"
+                                            name="email" placeholder="Alamat email belum dilengkapi">
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">No Handphone</label>
+                                        <input class="form-control" type="text" value="{{ $user->nohp }}"
+                                            name="nohp" placeholder="No Handphone belum dilengkapi">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Alamat</label>
-                                        <input class="form-control" type="text"
-                                            value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" name="alamat">
+                                        <input class="form-control" type="text" value="{{ $user->alamat }}"
+                                            name="alamat" placeholder="Alamat belum dilengkapi">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Kota</label>
-                                        <input class="form-control" type="text" value="New York" name="kota">
+                                        <input class="form-control" type="text" value="{{ $user->kota }}"
+                                            name="kota" placeholder="Kota belum dilengkapi">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Negara</label>
-                                        <input class="form-control" type="text" value="United States"
-                                            name="negara">
+                                        <input class="form-control" type="text" value="{{ $user->negara }}"
+                                            name="negara" placeholder="Negara belum dilengkapi">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Kode
                                             pos</label>
-                                        <input class="form-control" type="text" value="437300" name="kode_pos">
+                                        <input class="form-control" type="text" value="{{ $user->kodepos }}"
+                                            name="kodepos" placeholder="Kode pos belum dilengkapi">
                                     </div>
                                 </div>
 
@@ -176,8 +185,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </div>
 </body>
