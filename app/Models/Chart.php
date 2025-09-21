@@ -26,7 +26,7 @@ class Chart extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function product_id(): BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
@@ -41,7 +41,7 @@ class Chart extends Model
                 $query->whereHas('user', function ($query) use ($keyword) {
                     $query->where('username', 'like', '%' . $keyword . '%');
                 })->orWhereHas('product', function ($query) use ($keyword) {
-                    $query->where('nama', 'like', '%' . $keyword . '%' );
+                    $query->where('nama', 'like', '%' . $keyword . '%');
                 });
             }
         );

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\View\Components\Cart;
 use Illuminate\Support\Facades\Auth;
@@ -13,33 +14,38 @@ class ChartController extends Controller
 {
     public function index()
     {
-        return view('chart', ['chart' => Chart::filter(request(['keyword']))->paginate(10)]);
+        $user = Auth::user();
+        return view('Cart', ['carts' => Chart::where('user_id', $user->id)->get()]);
+        // return dd(Chart::where('user_id', $user->id)->get());
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|integer',
-            'producr_id' => 'required|integer',
+            'product_id' => 'required|integer',
             'qty' => 'required|integer',
-            'price_snapshot' => 'required|integer'
         ]);
 
-        $chart = chart::where('user_id', Auth::id())->where('product_id', $request->product_id)->first();
+        $user = Auth::user();
+        $product = Product::findOrFail($request->product_id);
+
+        $chart = chart::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
 
         if ($chart) {
             $chart->quantity += $request->qty;
             $chart->save();
         } else (
             Chart::create([
-                'user_id' => $request->user_id,
+                'user_id' => $user->id,
                 'product_id' => $request->product_id,
                 'quantity' => $request->qty,
-                'price_snapshot' => $request->price_snapshot
+                'price_snapshot' => $product->harga
             ])
         );
 
         return back();
+
+        // return dd($request->all());
     }
 
     public function updateQty(request $request, Chart $chart)

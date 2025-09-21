@@ -12,22 +12,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
     use HasFactory;
-        protected $fillable = ['nama','harga','stok', 'deskripsi', 'image', 'category_id'];
+    protected $fillable = ['nama', 'harga', 'stok', 'deskripsi', 'image', 'category_id'];
 
-        protected $with = ['category'];
+    protected $with = ['category'];
 
-    public function category():BelongsTo{
+    public function category(): BelongsTo
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function order():HasMany{
+    public function order(): HasMany
+    {
         return $this->hasMany(Order::class, 'product_id');
+    }
+
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Chart::class, 'product_id');
     }
 
     public function wishlists()
     {
-    return $this->hasMany(Wishlist::class);
+        return $this->hasMany(Wishlist::class);
     }
-
-
 }

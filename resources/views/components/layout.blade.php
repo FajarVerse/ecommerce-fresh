@@ -36,7 +36,7 @@
     @vite('resources/css/style.css')
     @vite('resources/css/cardProduct.css')
 
-
+    @livewireStyles
 </head>
 
 <body>
@@ -64,6 +64,7 @@
     <!-- Template Javascript -->
     {{-- <script src="js/main.js"></script> --}}
     @vite ('resources/js/app.js')
+    @livewireScripts
 </body>
 
 </html>
