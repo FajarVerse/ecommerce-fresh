@@ -85,21 +85,21 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="fw-bold">Subtotal:</span>
-                            <span>$96.00</span>
+                            <span>{{ $carts->sum('product.harga') * $carts->sum('quantity') }}</span>
                         </div>
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="fw-bold">Ongkos Kirim:</span>
-                            <span>$3.00</span>
+                            <span>{{ $ongkir ?? '-' }}</span>
                         </div>
 
                         <div class="border-top border-bottom py-3 mb-3 d-flex justify-content-between">
                             <span class="fw-bold">Total:</span>
-                            <span>$99.00</span>
+                            <span>{{ $carts->sum('product.harga') * $carts->sum('quantity') }}</span>
                         </div>
 
                         <a href="/checkout" class="btn btn-primary rounded-pill w-100 py-3 fw-bold">
-                            Proses Checkout
+                            Lanjutkan Pembayaran
                         </a>
                     </div>
                 </div>
