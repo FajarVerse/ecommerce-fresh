@@ -14,7 +14,7 @@ class ProductDetailSeeder extends Seeder
      */
     public function run(): void
     {
-        ProductDetail::factory(10)->recycle([
+        ProductDetail::factory(20)->recycle([
             Product::all()
         ])->create();
     }

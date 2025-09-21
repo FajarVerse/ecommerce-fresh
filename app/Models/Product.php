@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
     use HasFactory;
     protected $fillable = ['nama', 'harga', 'stok', 'deskripsi', 'image', 'category_id'];
-        protected $with = ['category', 'productdetail'];
+    protected $with = ['category', 'productdetail'];
 
     public function category(): BelongsTo
     {
@@ -35,9 +36,9 @@ class Product extends Model
         return $this->hasMany(Wishlist::class);
     }
 
-    public function productDetail(): BelongsTo
+    public function productDetail(): HasOne
     {
-        return $this->belongsTo(ProductDetail::class, 'product_id');
+        return $this->hasOne(ProductDetail::class, 'product_id');
     }
 
 }

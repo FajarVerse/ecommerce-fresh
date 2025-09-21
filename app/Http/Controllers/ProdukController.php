@@ -143,7 +143,10 @@ public function byCategory($id = null)
     public function show($id)
 {
     $product = Product::with('category', 'productDetail')->findOrFail($id);
-    return view('shop_detail', compact('product'));
+    $categories = Category::withCount('product')->get();
+    return view('shopDetail', ["product" => $product, "products" => Product::paginate(4), 'categories' => $categories ]);
+
+    // return dd($product);
 }
 
     public function addToWishlist(Request $request, $productId)

@@ -1,4 +1,4 @@
-<x-layout :categories="$categories">
+<x-layout>
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5 position-relative"
         style="background: url('{{ Vite::asset('resources/img/hero-img/fruits3.jpg') }}') no-repeat center center; 
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-lg-6">
                             <h4 class="fw-bold mb-3">{{ $product->nama }}</h4>
-                            <p class="mb-3">Kategori : Sayuran</p>
+                            <p class="mb-3">{{ $product->category->nama }}</p>
                             <h5 class="fw-bold mb-3">Rp.{{ $product->harga }}</h5>
                             <div class="d-flex mb-4">
                                 <i class="fa fa-star text-secondary"></i>
@@ -74,8 +74,9 @@
                                                         <p class="mb-0">Berat</p>
                                                     </div>
                                                     <div class="col-6">
-                                                        <p class="mb-0">{{ $product->productDetail->berat }}</p>
-                                                        <p class="mb-0">1 kg</p>
+                                                        <p class="mb-0">{{ $product->productDetail->berat ?? '0' }} kg
+                                                        </p>
+
                                                     </div>
                                                 </div>
                                                 <div
@@ -85,7 +86,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <p class="mb-0">
-                                                            {{ $product->productDetail->asal }}</p>
+                                                            {{ $product->productDetail->asal ?? 'tidak diketahui' }}</p>
                                                     </div>
                                                 </div>
                                                 <div
@@ -94,10 +95,8 @@
                                                         <p class="mb-0">Nutrisi</p>
                                                     </div>
                                                     <div class="col-6">
-                                                        <p class="mb-0">{{ $product->productDetail->nutrisi }}</p>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <p class="mb-0">Organik</p>
+                                                        <p class="mb-0">{{ $product->productDetail->nutrisi ?? '0' }}
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div
@@ -106,10 +105,8 @@
                                                         <p class="mb-0">Sisa Stok</p>
                                                     </div>
                                                     <div class="col-6">
-                                                        <p class="mb-0">{{ $product->productDetail->sisastok }}</p>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <p class="mb-0">Kesehatan</p>
+                                                        <p class="mb-0">{{ $product->productDetail->sisastok ?? '0' }}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
