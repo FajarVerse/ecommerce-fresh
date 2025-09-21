@@ -18,8 +18,8 @@
         <div style="position:relative; z-index:2;" class="text-center">
             <h1 class="display-6 fw-bold text-white">Cart</h1>
             <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item fw-bold"><a href="/" class="text-green">Home</a></li>
-                <li class="breadcrumb-item active text-white">Profile</li>
+                <li class="breadcrumb-item fw-bold"><a href="/" class="text-green">Beranda</a></li>
+                <li class="breadcrumb-item active text-white">Profil</li>
             </ol>
         </div>
     </div>
@@ -34,12 +34,12 @@
                         <table class="table align-middle">
                             <thead class="bg-green bg-opacity-25">
                                 <tr>
-                                    <th scope="col" class="fw-bold">Products</th>
-                                    <th scope="col" class="fw-bold">Name</th>
-                                    <th scope="col" class="fw-bold">Price</th>
-                                    <th scope="col" class="fw-bold">Quantity</th>
+                                    <th scope="col" class="fw-bold">Produk</th>
+                                    <th scope="col" class="fw-bold">Nama</th>
+                                    <th scope="col" class="fw-bold">Harga</th>
+                                    <th scope="col" class="fw-bold">Jumlah</th>
                                     <th scope="col" class="fw-bold">Total</th>
-                                    <th scope="col" class="fw-bold">Action</th>
+                                    <th scope="col" class="fw-bold"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,7 +71,7 @@
 
                 <div class="col-lg-4">
                     <div class="bg-light rounded p-4 shadow-sm" style="min-height: 100%;">
-                        <h2 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h2>
+                        <h2 class="display-6 mb-4">Keranjang<span class="fw-normal">Total</span></h2>
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="fw-bold">Subtotal:</span>
@@ -79,7 +79,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between mb-3">
-                            <span class="fw-bold">Shipping:</span>
+                            <span class="fw-bold">Ongkos Kirim:</span>
                             <span>$3.00</span>
                         </div>
 
@@ -89,7 +89,7 @@
                         </div>
 
                         <a href="/checkout" class="btn btn-primary rounded-pill w-100 py-3 fw-bold">
-                            Proceed to Checkout
+                            Proses Checkout
                         </a>
                     </div>
                 </div>

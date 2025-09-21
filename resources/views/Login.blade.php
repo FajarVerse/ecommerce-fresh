@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Masuk</title>
     <link rel="stylesheet" href="l" />
     @vite('resources/css/login.css')
   </head>
@@ -12,8 +12,8 @@
       <div class="left-content"></div>
       <div class="right-content">
         <div class="header-form">
-          <h1>Login</h1>
-          <p>Welcome back! Please enter your username and password</p>
+          <h1>Masuk</h1>
+          <p>Senang bertemu lagi! Masukkan username dan password untuk masuk ke akunmu.</p>
         </div>
         <form action="{{ route('login') }}" class="form" method="POST">
           @csrf
@@ -22,7 +22,7 @@
           <button type="submit" class="btn-submit">Log In</button>
         </form>
         <p class="form-url">
-          Don't have an account ? <a href="/register">Register</a>
+          Tidak punya akun ? <a href="/register">Daftar</a>
         </p>
       </div>
     </main>

@@ -6,7 +6,7 @@
                         <div class="col-lg-3">
                             <a href="#">
                                 <h1 class="text-primary mb-0">Fresh Nih!</h1>
-                                <p class="text-secondary mb-0">Fresh Fruits & Vegetables</p>
+                                <p class="text-secondary mb-0">Buah & Sayuran Segar</p>
                             </a>
                         </div>
                         <div class="col-lg-6">
@@ -28,7 +28,7 @@
                 <div class="row g-5">
                     <div class="col-lg-5 col-md-6">
                         <div class="footer-item">
-                            <h4 class="text-light mb-3">Why People Like us!</h4>
+                            <h4 class="text-light mb-3">Mengapa Orang-orang suka Kami!</h4>
                             <p class="mb-4">Kami menghadirkan sayur dan buah segar langsung dari petani pilihan setiap hari. 
     Produk kami bebas bahan kimia berbahaya, higienis, dan selalu terjaga kualitasnya. 
     Belanja jadi lebih mudah, sehat, dan terpercaya bersama kami!</p>
@@ -48,22 +48,18 @@
                     </div> --}}
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
-                            <h4 class="text-light mb-3">Account</h4>
-                            <a class="btn-link" href="">My Account</a>
-                            <a class="btn-link" href="/shop_detail">Shop details</a>
-                            <a class="btn-link" href="">Shopping Cart</a>
-                            <a class="btn-link" href="">Wishlist</a>
-                            <a class="btn-link" href="">Order History</a>
+                            <h4 class="text-light mb-3">Akun</h4>
+                            <a class="btn-link" href="">Keranjang</a>
+                            <a class="btn-link" href="">Riwayat Pesanan</a>
                             <a class="btn-link" href=""></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
-                            <h4 class="text-light mb-3">Contact</h4>
-                            <p>Address: Jl. Jayapura</p>
+                            <h4 class="text-light mb-3">Kontak</h4>
+                            <p>Alamat: Jl. Jayapura</p>
                             <p>Email: freshnih.@gmail.com</p>
-                            <p>Phone: +0899 9999 0000</p>
-                            <p>Payment Accepted</p>
+                            <p>No Telp: +0899 9999 0000</p>
                             <img src="img/payment.png" class="img-fluid" alt="">
                         </div>
                     </div>

@@ -24,5 +24,10 @@ class Product extends Model
         return $this->hasMany(Order::class, 'product_id');
     }
 
+    public function wishlists()
+    {
+    return $this->hasMany(Wishlist::class);
+    }
+
 
 }

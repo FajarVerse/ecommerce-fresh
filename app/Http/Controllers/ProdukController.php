@@ -123,4 +123,48 @@ class ProdukController extends Controller
 
         return redirect('/');
     }
+
+public function byCategory($id = null)
+{
+    // Ambil semua kategori beserta jumlah produk
+    $categories = Category::withCount('product')->get();
+    $totalProducts = Product::count();
+
+    // Cek jika id kategori null atau "7" (ID untuk "Semua")
+    if($id === null || $id == 7){ 
+        $products = Product::paginate(9); // Tampilkan semua produk
+    } else {
+        $products = Product::where('category_id', $id)->paginate(9); // Produk sesuai kategori
+    }
+
+    return view('shop', compact('categories', 'products', 'totalProducts'));
+}
+
+    public function addToWishlist(Request $request, $productId)
+    {
+        $user = auth()->user();
+        $product = Product::findOrFail($productId);
+
+        if (!$user->wishlists()->where('product_id', $productId)->exists()) {
+            $user->wishlists()->create(['product_id' => $productId]);
+            return redirect()->back()->with('success', 'Produk ditambahkan ke wishlist!');
+        }
+
+        return redirect()->back()->with('error', 'Produk sudah ada di wishlist!');
+    }
+
+    public function removeFromWishlist($productId)
+    {
+        $user = auth()->User();
+        $user->wishlists()->where('product_id', $productId)->delete();
+        return redirect()->back()->with('success', 'Produk dihapus dari wishlist!');
+    }
+
+    public function showWishlist()
+    {
+        $user = auth()->user();
+        $wishlists = $user->wishlists;
+        return view('wishlist', compact('wishlists'));
+    }
+
 }

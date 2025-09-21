@@ -3,6 +3,8 @@
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SearchController;
 
 
 // Route::get('/cart', function () {
@@ -41,6 +43,16 @@ Route::get('/pengaturan', function () {
 
 Route::get('/categories/{category:id}', function (Category $category) {
     return view('productbycategory', ["products" => $category->product]);
+});
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+Route::get('/category/{id}', [ProdukController::class, 'byCategory']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/wishlist/{productId}', [ProdukController::class, 'addToWishlist'])->name('wishlist.add');
+    Route::delete('/wishlist/{productId}', [ProdukController::class, 'removeFromWishlist'])->name('wishlist.remove');
+    Route::get('/wishlist', [ProdukController::class, 'showWishlist'])->name('wishlist.show');
 });
 
 require __DIR__ . "/auth.php";

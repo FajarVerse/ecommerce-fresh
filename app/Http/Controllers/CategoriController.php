@@ -12,6 +12,7 @@ class CategoriController extends Controller
         return view('Category', ['categories' => Category::filter(request(['keyword']))->paginate(10)]);
     }
 
+
     public function create()
     {
         return view('AddCategory');
