@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Chart;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('*', function ($view) {
             $view->with('user', Auth::user());
+        });
+
+        View::composer('*', function ($view) {
+            $view->with('cartItems', Chart::where('user_id', Auth::id())->get());
         });
     }
 }

@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-lg-6">
                             <h4 class="fw-bold mb-3">{{ $product->nama }}</h4>
-                            <p class="mb-3">Kategori : {{ $product->category->nama ?? "" }}</p>
+                            <p class="mb-3">Kategori : Sayuran</p>
                             <h5 class="fw-bold mb-3">Rp.{{ $product->harga }}</h5>
                             <div class="d-flex mb-4">
                                 <i class="fa fa-star text-secondary"></i>
@@ -49,25 +49,8 @@
                                 <i class="fa fa-star text-secondary"></i>
                                 <i class="fa fa-star"></i>
                             </div>
+                            <livewire:product-detail :product="$product" />
 
-                            <div class="input-group quantity mb-5" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text"
-                                    class="form-control form-control-sm text-center border-0 quantity-input"
-                                    value="1">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <a href="#"
-                                class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
                         </div>
                         <div class="col-lg-12">
                             <nav>
@@ -76,7 +59,6 @@
                                         role="tab" id="nav-about-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-about" aria-controls="nav-about"
                                         aria-selected="true">Deskripsi</button>
-
                                 </div>
                             </nav>
                             <div class="tab-content mb-5">
@@ -93,6 +75,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <p class="mb-0">{{ $product->productDetail->berat }}</p>
+                                                        <p class="mb-0">1 kg</p>
                                                     </div>
                                                 </div>
                                                 <div
@@ -101,7 +84,8 @@
                                                         <p class="mb-0">Asal Negara</p>
                                                     </div>
                                                     <div class="col-6">
-                                                        <p class="mb-0">{{ $product->productDetail->asal }}</p>
+                                                        <p class="mb-0">
+                                                            {{ $product->productDetail->asal }}</p>
                                                     </div>
                                                 </div>
                                                 <div
@@ -112,6 +96,9 @@
                                                     <div class="col-6">
                                                         <p class="mb-0">{{ $product->productDetail->nutrisi }}</p>
                                                     </div>
+                                                    <div class="col-6">
+                                                        <p class="mb-0">Organik</p>
+                                                    </div>
                                                 </div>
                                                 <div
                                                     class="row text-center align-items-center justify-content-center py-2">
@@ -121,14 +108,8 @@
                                                     <div class="col-6">
                                                         <p class="mb-0">{{ $product->productDetail->sisastok }}</p>
                                                     </div>
-                                                </div>
-                                                <div
-                                                    class="row bg-light text-center align-items-center justify-content-center py-2">
                                                     <div class="col-6">
-                                                        <p class="mb-0">Berat Minimal</p>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <p class="mb-0">250 Kg</p>
+                                                        <p class="mb-0">Kesehatan</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,7 +118,6 @@
                                 </div>
 
                                 <div class="tab-pane" id="nav-vision" role="tabpanel">
-
                                 </div>
                             </div>
                         </div>
@@ -161,49 +141,5 @@
             </div>
         </div>
     </div>
-    <script>
-        const shippingCost = 3.00;
-
-        function updateCartTotals() {
-            let subtotal = 0;
-            document.querySelectorAll("#cart-body tr").forEach(row => {
-                const price = parseFloat(row.querySelector(".price").dataset.price);
-                const qty = parseInt(row.querySelector(".quantity-input").value) || 0;
-                const rowTotal = price * qty;
-
-                // update total per row
-                row.querySelector(".total").textContent = `$${rowTotal.toFixed(2)}`;
-                subtotal += rowTotal;
-            });
-
-            // update summary box
-            document.getElementById("subtotal").textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById("grand-total").textContent =
-                `$${(subtotal + (subtotal > 0 ? shippingCost : 0)).toFixed(2)}`;
-        }
-
-        // plus/minus button logic
-        document.addEventListener("click", function(e) {
-            if (e.target.closest(".btn-plus")) {
-                const input = e.target.closest(".input-group").querySelector(".quantity-input");
-                input.value = parseInt(input.value) + 1;
-                updateCartTotals();
-            }
-
-            if (e.target.closest(".btn-minus")) {
-                const input = e.target.closest(".input-group").querySelector(".quantity-input");
-                input.value = Math.max(1, parseInt(input.value) - 1); // minimal 1
-                updateCartTotals();
-            }
-
-            if (e.target.classList.contains("remove")) {
-                e.target.closest("tr").remove();
-                updateCartTotals();
-            }
-        });
-
-        // initial load
-        updateCartTotals();
-    </script>
 
 </x-layout>

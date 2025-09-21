@@ -44,24 +44,34 @@
                             </thead>
                             <tbody>
                                 <!-- Contoh produk -->
-                                <tr>
-                                    <td>
-                                        <img src="{{ Vite::asset('resources/img/product_img/apel.jpg') }}"
-                                            style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px;"
-                                            class="rounded">
-                                    </td>
-                                    <td>Fresh Apple</td>
-                                    <td class="price" data-price="3.00">$3.00</td>
-                                    <td>
-                                        <input type="number" value="2" min="1"
-                                            class="form-control form-control-sm text-center quantity"
-                                            style="width: 70px;">
-                                    </td>
-                                    <td class="total">$6.00</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-danger rounded-pill px-3 remove">Remove</button>
-                                    </td>
-                                </tr>
+                                @foreach ($carts as $cart)
+                                    <tr>
+                                        <td>
+                                            <img src="{{ Vite::asset('resources/img/product_img/apel.jpg') }}"
+                                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px;"
+                                                class="rounded">
+                                        </td>
+                                        <td>{{ $cart->product->nama }}</td>
+                                        <td class="price" data-price="3.00">{{ $cart->product->harga }}</td>
+                                        <td>
+                                            <input type="number" value="{{ $cart->quantity }}" min="1"
+                                                class="form-control form-control-sm text-center quantity"
+                                                style="width: 70px;">
+                                        </td>
+                                        <td class="total">{{ $cart->product->harga * $cart->quantity }}</td>
+                                        <td>
+                                            <form action="{{ route('cart.destroy', $cart->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                {{-- <input type="hidden" name="cart_id" value="{{ $cart->id }}"> --}}
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-danger rounded-pill px-3 remove">
+                                                    Remove
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 <!-- Tambahkan produk lain -->
                             </tbody>
                         </table>
@@ -75,21 +85,21 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="fw-bold">Subtotal:</span>
-                            <span>$96.00</span>
+                            <span>{{ $carts->sum('product.harga') * $carts->sum('quantity') }}</span>
                         </div>
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="fw-bold">Ongkos Kirim:</span>
-                            <span>$3.00</span>
+                            <span>{{ $ongkir ?? '-' }}</span>
                         </div>
 
                         <div class="border-top border-bottom py-3 mb-3 d-flex justify-content-between">
                             <span class="fw-bold">Total:</span>
-                            <span>$99.00</span>
+                            <span>{{ $carts->sum('product.harga') * $carts->sum('quantity') }}</span>
                         </div>
 
                         <a href="/checkout" class="btn btn-primary rounded-pill w-100 py-3 fw-bold">
-                            Proses Checkout
+                            Lanjutkan Pembayaran
                         </a>
                     </div>
                 </div>
@@ -97,7 +107,7 @@
             </div>
         </div>
     </div>
-
+    {{-- 
     <script>
         // Update total saat quantity berubah
         document.querySelectorAll(".quantity").forEach(input => {
@@ -116,7 +126,7 @@
                 this.closest("tr").remove();
             });
         });
-    </script>
+    </script> --}}
 
 
 </x-layout>
