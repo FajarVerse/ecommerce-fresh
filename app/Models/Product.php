@@ -14,7 +14,7 @@ class Product extends Model
     use HasFactory;
         protected $fillable = ['nama','harga','stok', 'deskripsi', 'image', 'category_id'];
 
-        protected $with = ['category'];
+        protected $with = ['category', 'productdetail'];
 
     public function category():BelongsTo{
         return $this->belongsTo(Category::class);
@@ -27,6 +27,11 @@ class Product extends Model
     public function wishlists()
     {
     return $this->hasMany(Wishlist::class);
+    }
+
+    public function productDetail(): BelongsTo
+    {
+        return $this->belongsTo(ProductDetail::class, 'product_id');
     }
 
 

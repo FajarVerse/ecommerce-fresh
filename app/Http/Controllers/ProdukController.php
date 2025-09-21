@@ -140,6 +140,12 @@ public function byCategory($id = null)
     return view('shop', compact('categories', 'products', 'totalProducts'));
 }
 
+    public function show($id)
+{
+    $product = Product::with('category', 'productDetail')->findOrFail($id);
+    return view('shop_detail', compact('product'));
+}
+
     public function addToWishlist(Request $request, $productId)
     {
         $user = auth()->user();

@@ -9,7 +9,7 @@
                       
                           
                             <div class="col-xl-3">
-                                <x-search-bar :action="route('search')" placeholder="Cari buah..." />
+                                <x-search-bar :action="route('search')" placeholder="Cari buah & sayuran..." />
                             
                           
                       </div>
