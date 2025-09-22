@@ -24,9 +24,13 @@
 @props(['product', 'category'])
 
 <div class="card">
-    <img src="{{ Vite::asset('resources/img/product_img/apel.jpg') }}"
-        style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px;" class="rounded">
-    <div class="card_content">
+    {{-- <img src="{{ Vite::asset('resources/img/product_img/apel.jpg') }}"
+        style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px;" class="rounded"> --}}
+    <img src="{{ Vite::asset('resources/img/product_img/' . $product->image) }}"
+     style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px;"
+     class="rounded">
+
+        <div class="card_content">
         <div class="card_body">
             <div class="card_tag">
                 <a href="" class="card_category"

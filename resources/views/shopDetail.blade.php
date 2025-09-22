@@ -32,7 +32,7 @@
                         <div class="col-lg-6">
                             <div class="border rounded">
                                 <a href="#">
-                                    <img src="{{ Vite::asset('resources/img/product_img/apel.jpg') }}"
+                                    <img src="{{ Vite::asset('resources/img/product_img/' . $product->image) }}"
                                         class="img-fluid rounded w-100 h-100" alt=""
                                         style="max-height: 300px; object-fit: cover;">
                                 </a>

@@ -93,6 +93,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($carts as $cart)
+                                        
+                                    
                                     <tr>
                                         <th scope="row">
                                             <div class="d-flex align-items-center mt-2">
@@ -172,20 +175,8 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">
-                                        </th>
-                                        <td class="py-5">
-                                            <p class="mb-0 text-dark text-uppercase py-3">TOTAL</p>
-                                        </td>
-                                        <td class="py-5"></td>
-                                        <td class="py-5"></td>
-                                        <td class="py-5">
-                                            <div class="py-3 border-bottom border-top">
-                                                <p class="mb-0 text-dark">$135.00</p>
-                                            </div>
-                                        </td>
-                                    </tr>
+ --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

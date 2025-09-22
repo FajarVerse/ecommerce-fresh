@@ -47,7 +47,7 @@
                                 @foreach ($carts as $cart)
                                     <tr>
                                         <td>
-                                            <img src="{{ Vite::asset('resources/img/product_img/apel.jpg') }}"
+                                            <img src="{{ Vite::asset('resources/img/product_img/' . $product->image) }}"
                                                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px;"
                                                 class="rounded">
                                         </td>
