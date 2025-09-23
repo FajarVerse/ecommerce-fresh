@@ -26,6 +26,11 @@ class Product extends Model
         return $this->hasMany(Order::class, 'product_id');
     }
 
+    public function orderItem(): HasMany
+    {
+        return $this->hasMany(OrderItem::class, 'product_id');
+    }
+
     public function carts(): HasMany
     {
         return $this->hasMany(Chart::class, 'product_id');
@@ -40,5 +45,4 @@ class Product extends Model
     {
         return $this->hasOne(ProductDetail::class, 'product_id');
     }
-
 }

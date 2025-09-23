@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained(
-                table: 'order',
+                table: 'orders',
                 indexName: 'order_items_order_id'
             );
-            
+
             $table->foreignId('product_id')->constrained(
-                table: 'product_id',
+                table: 'products',
                 indexName: 'order_items_product_id'
             );
             $table->decimal('price', 12, 2);

@@ -1,8 +1,5 @@
 <x-layout>
-    <!-- Single Page Header start -->
-    {{-- <div class="container-fluid page-header py-5" 
-     style="background: url('{{ Vite::asset('resources/img/hero-img/fruits4.jpg') }}') no-repeat center center; 
-            background-size: cover;"> --}}
+
 
     <div class="container-fluid page-header py-5 position-relative"
         style="background: url('{{ Vite::asset('resources/img/hero-img/fruits4.jpg') }}') no-repeat center center; 
@@ -47,7 +44,7 @@
                                 @foreach ($carts as $cart)
                                     <tr>
                                         <td>
-                                            <img src="{{ Vite::asset('resources/img/product_img/' . $product->image) }}"
+                                            <img src="{{ Vite::asset('resources/img/product_img/' . $cart->product->image) }}"
                                                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px;"
                                                 class="rounded">
                                         </td>
@@ -98,7 +95,7 @@
                             <span>{{ $carts->sum('product.harga') * $carts->sum('quantity') }}</span>
                         </div>
 
-                        <a href="/checkout" class="btn btn-primary rounded-pill w-100 py-3 fw-bold">
+                        <a href="{{ route('checkout') }}" class="btn btn-primary rounded-pill w-100 py-3 fw-bold">
                             Lanjutkan Pembayaran
                         </a>
                     </div>
