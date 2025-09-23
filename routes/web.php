@@ -45,6 +45,10 @@ Route::get('/riwayatpesanan', function () {
     return view('RiwayatPesanan');
 });
 
+Route::get('/dashboard', function () {
+    return view('Dashboard1');
+});
+
 
 Route::get('/categories/{category:id}', function (Category $category) {
     return view('productbycategory', ["products" => $category->product]);
