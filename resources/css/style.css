@@ -307,23 +307,23 @@
 }
 
 .fruite .fruite-item {
-    display: flex;               /* supaya bisa atur child dengan flex */
-    flex-direction: column;      /* biar isi card dari atas ke bawah */
+    display: flex; /* supaya bisa atur child dengan flex */
+    flex-direction: column; /* biar isi card dari atas ke bawah */
     height: 100%;
     transition: 0.5s;
 }
 
 .fruite .fruite-item .fruite-img {
-    height: 50%;                 /* gambar ambil 50% tinggi card */
+    height: 50%; /* gambar ambil 50% tinggi card */
     overflow: hidden;
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
 }
 
 .fruite .fruite-item .fruite-img img {
-    height: 100%;                /* isi penuh area img */
+    height: 100%; /* isi penuh area img */
     width: 100%;
-    object-fit: cover;           /* biar gambar proporsional */
+    object-fit: cover; /* biar gambar proporsional */
     transition: 0.5s;
 }
 
@@ -332,7 +332,7 @@
 }
 
 .fruite .fruite-item .p-4 {
-    height: 50%;                 /* konten ambil 50% sisanya */
+    height: 50%; /* konten ambil 50% sisanya */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* harga & tombol selalu nempel bawah */
@@ -546,4 +546,37 @@
     outline: none;
     border-radius: 10px;
     color: rgba(100, 100, 100, 0.7);
+}
+
+/* Pembayaran Sukses */
+.success-circle {
+    width: 100px;
+    height: 100px;
+    background: #cfe9a1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.success-check {
+    color: hsl(72, 69%, 31%);
+    font-size: 2.5rem;
+}
+.payment-card {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* dari 400px jadi 800px */
+    margin: 20px auto;
+}
+
+/* backgroun button */
+.custom-green {
+    background-color: #cfe9a1;
+}
+.custom-green:hover {
+    background-color: hsl(114, 43%, 73%);
 }

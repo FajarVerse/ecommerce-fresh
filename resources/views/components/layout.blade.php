@@ -59,6 +59,7 @@
     @vite ('resources/lib/waypoints/waypoints.min.js')
     @vite ('resources/lib/lightbox/js/lightbox.min.js')
     @vite ('resources/lib/owlcarousel/owl.carousel.min.js')
+    
 
 
     <!-- Template Javascript -->

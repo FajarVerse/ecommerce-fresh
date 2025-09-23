@@ -119,10 +119,10 @@ class CheckoutController extends Controller
         }
     }
 
-    public function success($orderCode)
+    public function success()
     {
         Chart::where('user_id', Auth::id())->delete();
 
-        return view('success', ['orderCode' => $orderCode]);
+        return view('PembayaranSukses');
     }
 }

@@ -13,7 +13,7 @@
             snap.pay("{{ $snapToken }}", {
                 onSuccess: function(result) {
                     console.log(result);
-                    window.location.href = "/order/success/{{ $order_id }}";
+                    window.location.href = "{{ route('checkout.success') }}"
                 },
                 onPending: function(result) {
                     console.log(result);

@@ -5,6 +5,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\PaymentSuccessController;
 
 
 // Route::get('/cart', function () {
@@ -40,6 +41,10 @@ Route::get('/pengaturan', function () {
     return view('pengaturan');
 });
 
+Route::get('/riwayatpesanan', function () {
+    return view('RiwayatPesanan');
+});
+
 
 Route::get('/categories/{category:id}', function (Category $category) {
     return view('productbycategory', ["products" => $category->product]);
@@ -54,6 +59,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/wishlist/{productId}', [ProdukController::class, 'removeFromWishlist'])->name('wishlist.remove');
     Route::get('/wishlist', [ProdukController::class, 'showWishlist'])->name('wishlist.show');
 });
+
+
+
+Route::get('/pemb-sukses', [PaymentSuccessController::class, 'sukses'])->name('pembayaran.sukses');
 
 require __DIR__ . "/auth.php";
 require __DIR__ . '/shop.php';
