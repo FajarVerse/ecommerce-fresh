@@ -27,7 +27,8 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function productId(): BelongsTo{
+    public function productId(): BelongsTo
+    {
         return $this->belongsTo(Product::class);
     }
 
@@ -39,10 +40,10 @@ class OrderItem extends Model
             function ($query, $keyword) {
                 $query->whereHas('order', function ($query) use ($keyword) {
                     $query->where('order_code', 'like', '%', $keyword . '%');
-            })->orWhereHas('producId.product', function ($query) use ($keyword) {
-                $query->where('name', 'like', '%' . $keyword . '%');
-            });
+                })->orWhereHas('producId.product', function ($query) use ($keyword) {
+                    $query->where('name', 'like', '%' . $keyword . '%');
+                });
+            }
+        );
     }
-);
-}
 }

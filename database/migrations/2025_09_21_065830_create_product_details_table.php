@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('asal')->nullable();
             $table->string('nutrisi');
             $table->integer('sisastok');
-            $table->foreignId('product_id')->constrained(table:'products', indexName:'product_id');
+            $table->foreignId('product_id')->constrained(table: 'products', indexName: 'product_id');
             $table->timestamps();
         });
     }
