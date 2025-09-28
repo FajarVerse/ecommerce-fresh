@@ -11,7 +11,7 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        return view('produk', ['product' => Product::filter(request(['keyword']))->paginate(10)]);
+        return view('dashboard/data-product', ['product' => 'product']);
     }
 
     public function create()
@@ -124,30 +124,30 @@ class ProdukController extends Controller
         return redirect('/');
     }
 
-public function byCategory($id = null)
-{
-    // Ambil semua kategori beserta jumlah produk
-    $categories = Category::withCount('product')->get();
-    $totalProducts = Product::count();
+    public function byCategory($id = null)
+    {
+        // Ambil semua kategori beserta jumlah produk
+        $categories = Category::withCount('product')->get();
+        $totalProducts = Product::count();
 
-    // Cek jika id kategori null atau "7" (ID untuk "Semua")
-    if($id === null || $id == 7){ 
-        $products = Product::paginate(9); // Tampilkan semua produk
-    } else {
-        $products = Product::where('category_id', $id)->paginate(9); // Produk sesuai kategori
+        // Cek jika id kategori null atau "7" (ID untuk "Semua")
+        if ($id === null || $id == 7) {
+            $products = Product::paginate(9); // Tampilkan semua produk
+        } else {
+            $products = Product::where('category_id', $id)->paginate(9); // Produk sesuai kategori
+        }
+
+        return view('shop', compact('categories', 'products', 'totalProducts'));
     }
 
-    return view('shop', compact('categories', 'products', 'totalProducts'));
-}
-
     public function show($id)
-{
-    $product = Product::with('category', 'productDetail')->findOrFail($id);
-    $categories = Category::withCount('product')->get();
-    return view('shopDetail', ["product" => $product, "products" => Product::paginate(4), 'categories' => $categories ]);
+    {
+        $product = Product::with('category', 'productDetail')->findOrFail($id);
+        $categories = Category::withCount('product')->get();
+        return view('shopDetail', ["product" => $product, "products" => Product::paginate(4), 'categories' => $categories]);
 
-    // return dd($product);
-}
+        // return dd($product);
+    }
 
     public function addToWishlist(Request $request, $productId)
     {
@@ -175,5 +175,4 @@ public function byCategory($id = null)
         $wishlists = $user->wishlists;
         return view('wishlist', compact('wishlists'));
     }
-
 }
