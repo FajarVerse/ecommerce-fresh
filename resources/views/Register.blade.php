@@ -18,13 +18,13 @@
             </div>
             <form action="{{ route('register.post') }}" class="form" method="POST">
                 @csrf
-                <x-input-group type="text" name="username" id="username" label="Username" placeHolder="Enter your Username"></x-input-group>
-                <x-input-group type="password" name="password" id="password" label="Password" placeHolder="Enter your Password"></x-input-group>
-                <x-input-group type="password" name="password_confirmation" id="confirm_password" label="Confirm Password" placeHolder="Confirm your Password"></x-input-group>
-                <button type="submit" class="btn-submit">Register</button>
+                <x-input-group type="text" name="username" id="username" label="Nama Pengguna" placeHolder="Masukan Nama Pengguna"></x-input-group>
+                <x-input-group type="password" name="password" id="password" label="Kata Sandi" placeHolder="Masukan Kata Sandi"></x-input-group>
+                <x-input-group type="password" name="password_confirmation" id="confirm_password" label="Konfirmasi Password" placeHolder="Konfirmasi Kata Sandi"></x-input-group>
+                <button type="submit" class="btn-submit">Daftar</button>
             </form>
             <p class="form-url">
-                Already have an account? <a href="/login">Login</a>
+                Sudah Punya Akun ? <a href="/login">Masuk</a>
             </p>
         </div>
         <div class="left-content"></div>

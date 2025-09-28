@@ -78,18 +78,23 @@
                         @method('PATCH')
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
-                                <p class="mb-0">Edit Profile</p>
+                                <p class="mb-0">Edit Profil</p>
                                 <button type="submit" class="btn btn-success btn-sm ms-auto">Simpan</button>
                             </div>
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">User Information</p>
+                            <p class="text-uppercase text-sm">Informasi Pengguna</p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Username</label>
                                         <input class="form-control" type="text" value="{{ $user->username }}"
                                             name="username">
+
+                                            @error('username')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -97,6 +102,10 @@
                                         <label for="example-text-input" class="form-control-label">Alamat email</label>
                                         <input class="form-control" type="email" value="{{ $user->email }}"
                                             name="email" placeholder="Alamat email belum dilengkapi">
+
+                                            @error('email')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                     </div>
                                 </div>
 
@@ -105,6 +114,10 @@
                                         <label for="example-text-input" class="form-control-label">No Handphone</label>
                                         <input class="form-control" type="text" value="{{ $user->nohp }}"
                                             name="nohp" placeholder="No Handphone belum dilengkapi">
+
+                                            @error('nohp')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -112,6 +125,10 @@
                                         <label for="example-text-input" class="form-control-label">Alamat</label>
                                         <input class="form-control" type="text" value="{{ $user->alamat }}"
                                             name="alamat" placeholder="Alamat belum dilengkapi">
+
+                                            @error('alamat')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -119,6 +136,9 @@
                                         <label for="example-text-input" class="form-control-label">Kota</label>
                                         <input class="form-control" type="text" value="{{ $user->kota }}"
                                             name="kota" placeholder="Kota belum dilengkapi">
+                                            @error('kota')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -126,6 +146,9 @@
                                         <label for="example-text-input" class="form-control-label">Negara</label>
                                         <input class="form-control" type="text" value="{{ $user->negara }}"
                                             name="negara" placeholder="Negara belum dilengkapi">
+                                            @error('negara')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -134,6 +157,9 @@
                                             pos</label>
                                         <input class="form-control" type="text" value="{{ $user->kodepos }}"
                                             name="kodepos" placeholder="Kode pos belum dilengkapi">
+                                            @error('kodepos')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                     </div>
                                 </div>
 

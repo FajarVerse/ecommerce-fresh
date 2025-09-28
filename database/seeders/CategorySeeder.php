@@ -18,13 +18,10 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['id' => 1, 'nama' => 'Sayuran'],
-            ['id' => 2, 'nama' => 'Buah-buahan'],
             ['id' => 3, 'nama' => 'Buah Lokal'],
             ['id' => 4, 'nama' => 'Buah Impor'],
             ['id' => 5, 'nama' => 'Sayuran Lokal'],
             ['id' => 6, 'nama' => 'Sayuran Import'],
-            ['id' => 7, 'nama' => 'Semua'],
         ];
 
         foreach ($categories as $category) {

@@ -44,7 +44,7 @@
                                         <tr>
                                             <th scope="row">
                                                 <div class="d-flex align-items-center mt-2">
-                                                    <img src="{{ Vite::asset('resources/img/product_img/apel.jpg') }}"
+                                                    <img src="{{ Vite::asset('resources/img/product_img/' . $cart->product->image) }}"
                                                         alt="" class="img-fluid rounded-circle"
                                                         style="width: 90px; height: 90px;" alt="">
                                                 </div>

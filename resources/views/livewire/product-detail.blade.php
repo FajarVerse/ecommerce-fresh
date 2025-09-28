@@ -22,7 +22,7 @@
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <input type="hidden" name="qty" value="{{ $quantities[$product->id] }}">
             <button type="submit" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
-                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                <i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah Ke Keranjang
             </button>
         </form>
 
