@@ -38,7 +38,7 @@ class Loginrequest extends FormRequest{
 
 
     public function authenticate():void{
-        $this->ensurelsNotRateLimited();
+        $this->ensureIsNotRateLimited();
 
         if(!Auth::attempt($this->only('username', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
@@ -58,7 +58,7 @@ class Loginrequest extends FormRequest{
      * @throws \Illuminate\Validation\ValidatinException
      */
 
-    public function ensurelsNotrateLimited():void{
+    public function ensureIsNotrateLimited():void{
         if(! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }

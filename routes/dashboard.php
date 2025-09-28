@@ -1,12 +1,18 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
-  Route::get('/dashboard/product', [ProdukController::class, 'index'])->name('dahsboard.product');
+
+  Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+  
+  Route::get('/dashboard/product', [ProdukController::class, 'index'])->name('dashboard.product');
+  Route::get('/dashboard/product/add-product', [ProdukController::class, 'create'])->name('dashboard.product.create');
+  Route::post('/dashboard/product/add-product', [ProdukController::class, 'store'])->name('dashboard.product.store');
 
   Route::get('/dashboard/order', [OrderController::class, 'index'])->name('dashboard.order');
 

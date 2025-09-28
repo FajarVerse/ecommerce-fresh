@@ -1,4 +1,4 @@
-<?php
+www<?php
 
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;

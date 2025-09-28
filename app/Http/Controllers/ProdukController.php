@@ -11,19 +11,19 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        return view('dashboard/data-product', ['product' => 'product']);
+        return view('dashboard/data-product', ['products' => Product::paginate(10)]);
     }
 
     public function create()
     {
-        return view('produkCreate', ['categories' => Category::all()]);
+        return view('dashboard/product/add-product', ['categories' => Category::all()]);
     }
 
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:225',
+            'name' => 'required|string|max:225',
             'harga' => 'required|numeric|min:1',
             'deskripsi' => 'required|string|max:500',
             'stok' => 'required|numeric|min:1',
@@ -31,11 +31,11 @@ class ProdukController extends Controller
         ]);
 
         $product = Product::create([
-            'nama' => 'required|string|max:225',
-            'harga' => 'required|numeric|min:1',
-            'deskripsi' => 'required|string|max:500',
-            'stok' => 'required|numeric|min:1',
-            'category_id' => 'required|numeric|min:1',
+            'nama' => $request->name,
+            'harga' => $request->harga,
+            'deskripsi' => $request->deskripsi,
+            'stok' =>  $request->stok,
+            'category_id' => $request->category_id
         ]);
 
         if ($request->hasFile('image')) {
@@ -48,8 +48,10 @@ class ProdukController extends Controller
             $product->update([
                 'image' => 'image_products/' . $imageName
             ]);
-            return redirect('/');
+            return redirect()->route('dashboard.product');
         }
+
+        return dd($request->all());
     }
 
     public function edit(Request $request)

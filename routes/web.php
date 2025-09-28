@@ -8,23 +8,6 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PaymentSuccessController;
 
 
-// Route::get('/cart', function () {
-//     return view('Cart');
-// });
-
-// Route::get('/checkout', function () {
-//     return view('checkout');
-// });
-
-// Route::get('/shop_detail/{product:id}', function (Product $product) {
-//     $categories = Category::withCount('product')->get();
-//     return view('shopDetail', ["product" => $product, "products" => Product::paginate(4), 'categories' => $categories]);
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// });
-
 Route::get('/data_produk', function () {
     return view('DataProduk');
 });
@@ -44,11 +27,6 @@ Route::get('/pengaturan', function () {
 Route::get('/riwayatpesanan', function () {
     return view('RiwayatPesanan');
 });
-
-Route::get('/dashboard', function () {
-    return view('Dashboard1');
-});
-
 
 Route::get('/categories/{category:id}', function (Category $category) {
     return view('productbycategory', ["products" => $category->product]);
