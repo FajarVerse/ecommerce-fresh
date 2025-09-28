@@ -70,3 +70,7 @@ require __DIR__ . '/product.php';
 require __DIR__ . '/cart.php';
 require __DIR__ . '/checkout.php';
 require __DIR__ . '/profile.php';
+
+
+// Dashboard
+require __DIR__ . '/dashboard.php';
