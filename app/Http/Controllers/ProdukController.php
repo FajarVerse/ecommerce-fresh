@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,6 +29,9 @@ class ProdukController extends Controller
             'deskripsi' => 'required|string|max:500',
             'stok' => 'required|numeric|min:1',
             'category_id' => 'required|numeric|min:1',
+            'berat' => 'required|numeric|min:4',
+            'asal' => 'required|string|min:5',
+            'nutrisi' => 'required|string|min:4',
         ]);
 
         $product = Product::create([
@@ -40,18 +44,24 @@ class ProdukController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = uniqid() . '.' .
-                $image->getClientOriginalExtension();
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
 
             Storage::disk('public')->putFileAs('image_products', $image, $imageName);
 
             $product->update([
-                'image' => 'image_products/' . $imageName
+                'image' => 'image_products/' . $imageName     
             ]);
-            return redirect()->route('dashboard.product');
         }
 
-        return dd($request->all());
+        ProductDetail::create([
+            'berat' => $request->berat,
+            'asal' => $request->asal,
+            'nutrisi' => $request->nutrisi,
+            'sisastok' => 0,
+            'product_id' => $product->id,
+        ]);
+
+        return redirect()->route('dashboard.product');
     }
 
     public function edit(Request $request)

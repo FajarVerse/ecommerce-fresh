@@ -1,7 +1,7 @@
 <x-layout-dashboard title="Tambah Product">
     <div class="col-md-12">
         <div class="card">
-            <form action="{{ route('dashboard.product.store') }}" method="POST" class="col-md-12">
+            <form action="{{ route('dashboard.product.store') }}" method="POST" enctype="multipart/form-data" class="col-md-12">
                 @csrf
                 <div class="card-header pb-0">
                     <div class="d-flex align-items-center">
@@ -34,12 +34,45 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Stok</label>
                                 <input class="form-control" type="number" name="stok" placeholder="">
 
-                                @error('deskripsi')
+                                @error('stok')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="example-text-input" class="form-control-label">Berat 1 Produk (gram)</label>
+                                <input class="form-control" type="number" name="berat" placeholder="satuan gram">
+
+                                @error('berat')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="example-text-input" class="form-control-label">Nutrisi</label>
+                                <input class="form-control" type="text" name="nutrisi" placeholder="nama vitamin">
+
+                                @error('nutrisi')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="example-text-input" class="form-control-label">Asal</label>
+                                <input class="form-control" type="text" name="asal" placeholder="">
+
+                                @error('asal')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -58,7 +91,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Gambar</label>
-                                <input class="form-control" type="file" name="image" placeholder="">
+                                <input class="form-control" type="file" name="image" placeholder="" accept="image/jpeg, image/png, image/jpg">
 
                                 @error('image')
                                     <small class="text-danger">{{ $message }}</small>

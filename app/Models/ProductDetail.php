@@ -11,7 +11,7 @@ class ProductDetail extends Model
 {
     use HasFactory;
 
-    protected $fiilabe = [
+    protected $fillable = [
         'berat',
         'asal',
         'nutrisi',
