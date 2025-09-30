@@ -11,13 +11,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable = ['order_number', 'status', 'total', 'user_id', 'payment_method'];
+
+    protected $fillable = [
+        'order_number',
+        'status',
+        'total',
+        'user_id',
+        'payment_method',
+        'product_id',
+        'jumlah'
+    ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    // public function product():BelongsTo{
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }   
+    
+}
+
+
+// public function product():BelongsTo{
     //     return $this->belongsTo(Product::class);
     // }
-}

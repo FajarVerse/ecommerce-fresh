@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\ProductDetail;
 use Illuminate\Http\Request;
+use App\Models\ProductDetail;
 use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
@@ -64,15 +65,15 @@ class ProdukController extends Controller
         return redirect()->route('dashboard.product');
     }
 
-    public function edit(Request $request)
-    {
-        $product = $request->id;
+    // public function edit(Request $request)
+    // {
+    //     $product = $request->id;
 
-        return view('UpdateProduk', [
-            'product' => Product::find($product),
-            'categories' => Category::all()
-        ]);
-    }
+    //     return view('UpdateProduk', [
+    //         'product' => Product::find($product),
+    //         'categories' => Category::all()
+    //     ]);
+    // }
 
     public function search(Request $request)
     {
@@ -85,56 +86,112 @@ class ProdukController extends Controller
         return view('products.index', compact('products', 'keyword'));
     }
 
-    public function update(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required|string|max:225',
-            'harga' => 'required|numeric|min:1',
-            'deskripsi' => 'required|string|max:500',
-            'stok' => 'required|numeric|min:1',
-            'category_id' => 'required|numeric|min:1',
-        ]);
 
-        $product = Product::findOrFail($request->id);
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'nama' => 'required|string|max:225',
+        'harga' => 'required|numeric|min:1',
+        'deskripsi' => 'required|string|max:500',
+        'stok' => 'required|numeric|min:1',
+        'category_id' => 'required|numeric|min:1',
+    ]);
 
-        $oldImage = $product->image;
+    $product = Product::findOrFail($id);
+    $oldImage = $product->image;
+
+    $product->update([
+        'nama' => $request->nama,
+        'deskripsi' => $request->deskripsi,
+        'harga' => $request->harga,
+        'stok' => $request->stok,
+        'category_id' => $request->category_id
+    ]);
+
+    if ($request->hasFile('image')) {
+        if ($oldImage && Storage::disk('public')->exists($oldImage)) {
+            Storage::disk('public')->delete($oldImage);
+        }
+
+        $image = $request->file('image');
+        $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+
+        Storage::disk('public')->putFileAs('image_products', $image, $imageName);
 
         $product->update([
-            'nama' => $request->nama,
-            'deskripsi' => $request->deskripsi,
-            'harga' => $request->harga,
-            'category_id' => $request->category_id
+            'image' => 'image_products/' . $imageName
         ]);
-
-        if ($request->hasFile('image')) {
-
-            if ($oldImage && Storage::disk('public')->exists($oldImage)) {
-                Storage::disk('public')->delete($oldImage);
-            }
-
-            $image = $request->file('image');
-            $imageName = uniqid() . '.' .
-                $image->getClientOriginalExtension();
-
-            Storage::disk('public')->putFileAs('image_products', $image, $imageName);
-
-            $product->update([
-                'image' => 'image_products/' . $imageName
-            ]);
-        }
-        return redirect('/product');
     }
 
-    public function destroy(Request $request)
-    {
-        $idProduct = $request->query('id');
+    return redirect()->route('dashboard.product')->with('success', 'Produk berhasil diperbarui.');
+}
 
-        // ProductVariant::where('product_id', $idProduct)->delete();
 
-        Product::where('id', $idProduct)->delete();
+    // public function update(Request $request)
+    // {
+    //     $request->validate([
+    //         'nama' => 'required|string|max:225',
+    //         'harga' => 'required|numeric|min:1',
+    //         'deskripsi' => 'required|string|max:500',
+    //         'stok' => 'required|numeric|min:1',
+    //         'category_id' => 'required|numeric|min:1',
+    //     ]);
 
-        return redirect('/');
+    //     $product = Product::findOrFail($request->id);
+
+    //     $oldImage = $product->image;
+
+    //     $product->update([
+    //         'nama' => $request->nama,
+    //         'deskripsi' => $request->deskripsi,
+    //         'harga' => $request->harga,
+    //         'category_id' => $request->category_id
+    //     ]);
+
+    //     if ($request->hasFile('image')) {
+
+    //         if ($oldImage && Storage::disk('public')->exists($oldImage)) {
+    //             Storage::disk('public')->delete($oldImage);
+    //         }
+
+    //         $image = $request->file('image');
+    //         $imageName = uniqid() . '.' .
+    //             $image->getClientOriginalExtension();
+
+    //         Storage::disk('public')->putFileAs('image_products', $image, $imageName);
+
+    //         $product->update([
+    //             'image' => 'image_products/' . $imageName
+    //         ]);
+    //     }
+    //     return redirect('/product');
+    // }
+
+    // public function destroy(Request $request)
+    // {
+    //     $idProduct = $request->query('id');
+
+    //     // ProductVariant::where('product_id', $idProduct)->delete();
+
+    //     Product::where('id', $idProduct)->delete();
+
+    //     return redirect('/');
+    // }
+
+    public function destroy($id)
+{
+    $product = Product::findOrFail($id);
+
+    if ($product->image && Storage::disk('public')->exists($product->image)) {
+        Storage::disk('public')->delete($product->image);
     }
+
+    $product->productDetail()->delete(); // hapus detail juga
+    $product->delete();
+
+    return redirect()->route('dashboard.product')->with('success', 'Produk berhasil dihapus.');
+}
+
 
     public function byCategory($id = null)
     {
@@ -187,4 +244,6 @@ class ProdukController extends Controller
         $wishlists = $user->wishlists;
         return view('wishlist', compact('wishlists'));
     }
+
+    
 }

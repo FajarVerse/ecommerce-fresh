@@ -1,10 +1,10 @@
-{{-- <x-layout-dashboard title="Detail Pesanan">
+<x-layout-dashboard title="Pesanan">
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Tabel Detail Pesanan</h6>
+                        <h6>Tabel User</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -12,88 +12,57 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            No Pesanan
+                                            Username
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Nama produk
+                                            Email
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Harga
+                                            Password
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Jumlah
+                                            Alamat
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Total Harga
+                                            No HP
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($users as $user)                                              
                                     <tr>
                                         <td>
                                             <div class="d-flex px-3 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">ORD-000-0002</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $user->username }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="">
-                                            <p class="text-xs font-weight-bold mb-0">Buah Buahan Segar</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{  $user->email }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">Rp 10.000</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $user->password }}</p>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">10</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $user->alamat }}</span>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">Rp 100.000</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{  $user->nohp }}</p>
                                         </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <x-footer-dashboard></x-footer-dashboard>
-    </div>
-</x-layout-dashboard> --}}
-
-
-<x-layout-dashboard title="Detail Pesanan">
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>Tabel Detail Pesanan</h6>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    @foreach ($orders as $order)
-                                    <tr>
-                                        <th>No Pesanan</th>
-                                        <th>Nama Pemesan</th>
-                                        <th>Nama Produk</th>
-                                        <th class="text-center">Harga Produk</th>
-                                        <th class="text-center">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ $order->order_number }}</td>
-                                        <td>{{ $order->user->username }}</td>
-                                        <td>{{ $order->product->name }}</td>
-                                        <td class="text-center">Rp {{ number_format($order->product->price, 0, ',', '.') }}</td>
-                                        <td class="text-center">Rp {{ number_format($order->total, 0, ',', '.') }}</td>
+                                        {{-- <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">{{  $user->kota }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">{{  $user->negara }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">{{  $user->kodepos }}</p>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

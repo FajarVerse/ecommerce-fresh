@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,6 +11,11 @@ class UserProfileController extends Controller
     public function index()
     {
         return view('profile');
+    }
+
+    public function userdata()
+    {
+        return view('dashboard/data-user', ['users' => User::paginate(10)]);
     }
 
     public function update(Request $request)

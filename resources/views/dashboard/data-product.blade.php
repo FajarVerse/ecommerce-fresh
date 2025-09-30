@@ -77,19 +77,42 @@
                                                 <p class="text-xs font-weight-bold mb-0">
                                                     {{ $product->productDetail->berat }}</p>
                                             </td>
-                                            <td class="align-middle">
+                                            {{-- <td class="align-middle">
                                                 <div class="d-flex justify-content-around">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
+                                                    <a href="javascript:;" onclick="editUser(1)"
+                                                        class="text-secondary font-weight-bold text-xs">
                                                         Edit
                                                     </a>
-                                                    <a href="javascript:;" class="text-danger font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Delete user">
+                                                    <a href="javascript:;" onclick="deleteUser(1)"
+                                                        class="text-danger font-weight-bold text-xs">
                                                         Hapus
                                                     </a>
                                                 </div>
+                                            </td> --}}
+
+                                            <td class="align-middle">
+                                                <div class="d-flex justify-content-around">
+                                                    <!-- Tombol Edit -->
+                                                    <a href="{{ route('dashboard.product', $product->id) }}"
+                                                        class="text-secondary font-weight-bold text-xs">
+                                                        Edit
+                                                    </a>
+
+                                                    <!-- Tombol Hapus -->
+                                                    <form
+                                                        action="{{ route('dashboard.product.destroy', $product->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Yakin mau hapus produk ini?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="text-danger font-weight-bold text-xs border-0 bg-transparent">
+                                                            Hapus
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -105,3 +128,26 @@
         <x-footer-dashboard></x-footer-dashboard>
     </div>
 </x-layout-dashboard>
+
+<script>
+    function editUser(id) {
+        alert("Edit user dengan ID: " + id);
+        // bisa diarahkan ke halaman edit
+        window.location.href = "/user/" + id + "/edit";
+    }
+
+    function deleteUser(id) {
+        if (confirm("Yakin mau hapus user ini?")) {
+            // contoh kirim fetch API
+            fetch('/user/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            }).then(() => {
+                alert("User berhasil dihapus");
+                location.reload();
+            });
+        }
+    }
+</script>

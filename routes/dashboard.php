@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\OrderItemController;
-use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\UserProfileController;
 
 Route::middleware('auth')->group(function () {
 
@@ -17,4 +18,5 @@ Route::middleware('auth')->group(function () {
   Route::get('/dashboard/order', [OrderController::class, 'index'])->name('dashboard.order');
 
   Route::get('/dashboard/order-detail', [OrderItemController::class, 'index'])->name('dashboard.order-detail');
+  Route::get('/dashboard/data-user', [UserProfileController::class, 'userdata'])->name('dashboard.data-user');
 });

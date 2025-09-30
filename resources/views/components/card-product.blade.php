@@ -26,7 +26,7 @@
 <div class="card">
     {{-- <img src="{{ Vite::asset('resources/img/product_img/apel.jpg') }}"
         style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px;" class="rounded"> --}}
-    <img src="{{ Vite::asset('resources/img/product_img/' . $product->image) }}"
+    <img src="{{ asset('storage/' . $product->image) }}"
      style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px;"
      class="rounded">
 
@@ -44,10 +44,10 @@
                         @if ($product->wishlists()->where('user_id', auth()->id())->exists())
                             @method('DELETE')
                         @endif
-                        <button type="submit" class="card_like"
+                        {{-- <button type="submit" class="card_like"
                             style="color: {{ $product->wishlists()->where('user_id', auth()->id())->exists()? 'red': 'grey' }};">
                             <i class="fas fa-heart"></i>
-                        </button>
+                        </button> --}}
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="card_like" style="color: grey;">

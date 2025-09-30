@@ -7,6 +7,9 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PaymentSuccessController;
 
+Route::prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::resource('product', ProdukController::class);
+});
 
 Route::get('/data_produk', function () {
     return view('DataProduk');
@@ -31,6 +34,12 @@ Route::get('/riwayatpesanan', function () {
 Route::get('/categories/{category:id}', function (Category $category) {
     return view('productbycategory', ["products" => $category->product]);
 });
+
+Route::get('/dashboard/data-user', function () {
+    return view('RiwayatPesanan');
+});
+
+Route::get('/dashboard/data-user', [ProdukController::class, 'index'])->name('dashboard.data-user');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
