@@ -20,14 +20,14 @@ class OrderItem extends Model
         'quantity',
     ];
 
-    protected $with = ['order', 'productId.product'];
+    protected $with = ['order', 'product'];
 
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
 
-    public function productId(): BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }

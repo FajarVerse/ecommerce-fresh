@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -22,6 +23,8 @@ class Order extends Model
         'jumlah'
     ];
 
+    protected $with = ['user', 'product'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -30,8 +33,12 @@ class Order extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
-    }   
-    
+    }
+
+    public function orderItem(): HasMany
+    {
+        return $this->hasMany(OrderItem::class, 'order_id');
+    }
 }
 
 

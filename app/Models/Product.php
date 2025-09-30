@@ -46,8 +46,8 @@ class Product extends Model
         return $this->hasOne(ProductDetail::class, 'product_id');
     }
 
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
+    // public function orders(): HasMany
+    // {
+    //     return $this->hasMany(Order::class, 'product_id');
+    // }
 }

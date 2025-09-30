@@ -93,7 +93,7 @@ class CheckoutController extends Controller
             }
 
             $orderCode = 'ORD-' . date('Ymd') . '-' . str_pad($order->id, 5, '0', STR_PAD_LEFT);
-            $order->update(['order_code' => $orderCode, 'total' => $total]);
+            $order->update(['order_number' => $orderCode, 'total' => $total]);
 
             \Midtrans\Config::$serverKey = config('midtrans.server_key');
             \Midtrans\Config::$isProduction = config('midtrans.is_production');

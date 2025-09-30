@@ -50,7 +50,7 @@ class ProdukController extends Controller
             Storage::disk('public')->putFileAs('image_products', $image, $imageName);
 
             $product->update([
-                'image' => 'image_products/' . $imageName     
+                'image' => 'image_products/' . $imageName
             ]);
         }
 
@@ -65,15 +65,7 @@ class ProdukController extends Controller
         return redirect()->route('dashboard.product');
     }
 
-    // public function edit(Request $request)
-    // {
-    //     $product = $request->id;
 
-    //     return view('UpdateProduk', [
-    //         'product' => Product::find($product),
-    //         'categories' => Category::all()
-    //     ]);
-    // }
 
     public function search(Request $request)
     {
@@ -86,45 +78,61 @@ class ProdukController extends Controller
         return view('products.index', compact('products', 'keyword'));
     }
 
+    public function edit(Product $product)
+    {
 
-    public function update(Request $request, $id)
-{
-    $request->validate([
-        'nama' => 'required|string|max:225',
-        'harga' => 'required|numeric|min:1',
-        'deskripsi' => 'required|string|max:500',
-        'stok' => 'required|numeric|min:1',
-        'category_id' => 'required|numeric|min:1',
-    ]);
-
-    $product = Product::findOrFail($id);
-    $oldImage = $product->image;
-
-    $product->update([
-        'nama' => $request->nama,
-        'deskripsi' => $request->deskripsi,
-        'harga' => $request->harga,
-        'stok' => $request->stok,
-        'category_id' => $request->category_id
-    ]);
-
-    if ($request->hasFile('image')) {
-        if ($oldImage && Storage::disk('public')->exists($oldImage)) {
-            Storage::disk('public')->delete($oldImage);
-        }
-
-        $image = $request->file('image');
-        $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
-
-        Storage::disk('public')->putFileAs('image_products', $image, $imageName);
-
-        $product->update([
-            'image' => 'image_products/' . $imageName
+        return view('dashboard/product/edit-product', [
+            'product' => $product,
+            'categories' => Category::all()
         ]);
     }
 
-    return redirect()->route('dashboard.product')->with('success', 'Produk berhasil diperbarui.');
-}
+    public function update(Request $request)
+    {
+        $request->validate([
+            'nama' => 'sometimes|string|max:225',
+            'harga' => 'sometimes|numeric|min:1',
+            'deskripsi' => 'sometimes|string|max:500',
+            'stok' => 'sometimes|numeric|min:1',
+            'category_id' => 'sometimes|numeric|min:1',
+        ]);
+
+        $product = Product::findOrFail($request->id);
+        $oldImage = $product->image;
+
+        $product->update([
+            'nama' => $request->name ?? $product->nama,
+            'deskripsi' => $request->deskripsi ?? $product->deskripsi,
+            'harga' => $request->harga ?? $product->harga,
+            'stok' => $request->stok ?? $product->stok,
+            'category_id' => $request->category_id ?? $product->category_id
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($oldImage && Storage::disk('public')->exists($oldImage)) {
+                Storage::disk('public')->delete($oldImage);
+            }
+
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+
+            Storage::disk('public')->putFileAs('image_products', $image, $imageName);
+
+            $product->update([
+                'image' => 'image_products/' . $imageName
+            ]);
+        }
+
+        ProductDetail::create([
+            'berat' => $request->berat ?? $product->detail->berat,
+            'asal' => $request->asal,
+            'nutrisi' => $request->nutrisi ?? $product->detail->nutrisi,
+            'sisastok' => 0,
+            'product_id' => $product->id ?? $product->detail->product_id,
+        ]);
+
+        return redirect()->route('dashboard.product')->with('success', 'Produk berhasil diperbarui.');
+    }
 
 
     // public function update(Request $request)
@@ -178,19 +186,18 @@ class ProdukController extends Controller
     //     return redirect('/');
     // }
 
-    public function destroy($id)
-{
-    $product = Product::findOrFail($id);
+    public function destroy(Product $product)
+    {
 
-    if ($product->image && Storage::disk('public')->exists($product->image)) {
-        Storage::disk('public')->delete($product->image);
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        $product->productDetail()->delete(); // hapus detail juga
+        $product->delete();
+
+        return redirect()->route('dashboard.product')->with('success', 'Produk berhasil dihapus.');
     }
-
-    $product->productDetail()->delete(); // hapus detail juga
-    $product->delete();
-
-    return redirect()->route('dashboard.product')->with('success', 'Produk berhasil dihapus.');
-}
 
 
     public function byCategory($id = null)
@@ -244,6 +251,4 @@ class ProdukController extends Controller
         $wishlists = $user->wishlists;
         return view('wishlist', compact('wishlists'));
     }
-
-    
 }

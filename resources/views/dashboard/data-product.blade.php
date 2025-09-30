@@ -50,7 +50,7 @@
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
                                                         <img src="{{ asset('storage/' . $product->image) }}"
-                                                            class="avatar avatar-sm me-3" alt="user1">
+                                                            class="avatar avatar-sm me-3" alt="user1" />
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">{{ $product->nama }}</h6>
@@ -71,11 +71,11 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $product->productDetail->nutrisi }} gram</p>
+                                                    {{ $product->productDetail->nutrisi ?? 'tidak diketahui' }} gram</p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $product->productDetail->berat }}</p>
+                                                    {{ $product->productDetail->berat ?? 'tidak diketahui' }}</p>
                                             </td>
                                             {{-- <td class="align-middle">
                                                 <div class="d-flex justify-content-around">
@@ -93,7 +93,7 @@
                                             <td class="align-middle">
                                                 <div class="d-flex justify-content-around">
                                                     <!-- Tombol Edit -->
-                                                    <a href="{{ route('dashboard.product', $product->id) }}"
+                                                    <a href="{{ route('dashboard.product.edit', $product->id) }}"
                                                         class="text-secondary font-weight-bold text-xs">
                                                         Edit
                                                     </a>
