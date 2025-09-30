@@ -64,6 +64,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{-- Pagination --}}
+                            <div class="mt-3 px-3">
+                                {{ $order_items->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
