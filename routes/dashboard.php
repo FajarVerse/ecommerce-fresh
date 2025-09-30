@@ -7,7 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\UserProfileController;
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'admin')->group(function () {
 
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

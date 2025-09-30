@@ -7,9 +7,9 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PaymentSuccessController;
 
-Route::prefix('dashboard')->name('dashboard.')->group(function () {
-    Route::resource('product', ProdukController::class);
-});
+// Route::prefix('dashboard')->name('dashboard.')->group(function () {
+//     Route::resource('product', ProdukController::class);
+// });
 
 Route::get('/data_produk', function () {
     return view('DataProduk');
